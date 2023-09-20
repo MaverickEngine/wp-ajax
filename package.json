@@ -2,9 +2,10 @@
   "name": "wp-ajax",
   "version": "0.0.1",
   "description": "A simple JS library to Get, Post, Put and Delete to a Wordpress API",
-  "main": "index.js",
+  "main": "dist/ajax.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --outDir ./dist"
   },
   "repository": {
     "type": "git",
