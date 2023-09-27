@@ -1,7 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.apiPut = exports.apiDelete = exports.apiGet = exports.apiPost = void 0;
-const wp = window.wp;
+function handleError(response) {
+    if (!response.ok) {
+        const status = response.status;
+        const message = response.responseJSON?.message || response.statusText || response.responseText || response;
+        const code = response.responseJSON?.code || response.code || "";
+        return { status, code, message };
+    }
+    return response;
+}
 function apiPost(path, data, headers = {}) {
     return new Promise((resolve, reject) => {
         wp.apiRequest({
@@ -17,7 +25,7 @@ function apiPost(path, data, headers = {}) {
             resolve(response);
         })
             .fail(async (response) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
@@ -36,7 +44,7 @@ function apiGet(path, headers = {}) {
             resolve(response);
         })
             .fail(async (response) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
@@ -55,7 +63,7 @@ function apiDelete(path, headers = {}) {
             resolve(response);
         })
             .fail(async (response) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
@@ -75,7 +83,7 @@ function apiPut(path, data, headers = {}) {
             resolve(response);
         })
             .fail(async (response) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }

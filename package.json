@@ -1,6 +1,6 @@
 {
   "name": "wp-ajax",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple JS library to Get, Post, Put and Delete to a Wordpress API",
   "main": "dist/ajax.js",
   "scripts": {

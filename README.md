@@ -49,6 +49,18 @@ async function deletePost($post_id) {
 }
 ```
 
+## Error Handling
+
+If the API returns an error, the library will throw an error with the following format:
+
+```js
+{
+    status: 400,
+    code: "rest_invalid_param",
+    message: "The request is invalid"
+}
+```
+
 ## Calling from PHP
 
 Make sure you include the "wp-api" library when you enqueue your script:

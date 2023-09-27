@@ -1,4 +1,15 @@
-const wp = (window as any).wp;
+declare const wp: any;
+
+function handleError(response: any) {
+    if (!response.ok) {
+        const status = response.status;
+        const message = response.responseJSON?.message || response.statusText || response.responseText || response;
+        const code = response.responseJSON?.code || response.code || "";
+        return { status, code, message };
+    }
+    return response;
+}
+
 export function apiPost(path: string, data: any, headers: object = {}) {
     return new Promise((resolve, reject) => {
         wp.apiRequest({
@@ -14,7 +25,7 @@ export function apiPost(path: string, data: any, headers: object = {}) {
             resolve(response);
         })
         .fail(async (response: any) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
@@ -33,7 +44,7 @@ export function apiGet(path: string, headers: object = {}) {
             resolve(response);
         })
         .fail(async (response: any) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
@@ -52,7 +63,7 @@ export function apiDelete(path: string, headers: object = {}) {
             resolve(response);
         })
         .fail(async (response: any) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
@@ -72,7 +83,7 @@ export function apiPut(path: string, data: any, headers: object = {}) {
             resolve(response);
         })
         .fail(async (response: any) => {
-            reject(response.responseJSON?.message || response.statusText || response.responseText || response);
+            reject(handleError(response));
         });
     });
 }
